@@ -1,13 +1,11 @@
+#!/usr/bin/perl
 ##############################################
 ### DVR RECORD SCRIPT FOR SMOOTHSTREAMS.TV ###
 ###   Contact me at <aTheN99@gmail.com>    ###
 ##############################################
-#!/usr/bin/perl
 $|++;
 use strict;
-use lib "/home/ctaylor/source/common/perl";
 use Proc::Background qw(timeout_system);
-use StringRoutines;
 
 my $username = "replace_me";  ### SMOOTHSTREAMS LOGIN
 my $password = "replace_me";  ### SMOOTHSTREAMS PASSWORD
@@ -55,4 +53,14 @@ if ($hash) {
 
     my $cmd = `/usr/bin/pkill rtmpdump`;
     print "done.\n";
+}
+
+sub strstr($$$) {
+    my ($haystack, $needle, $offset) = @_; if (!$offset) { $offset = 0; }
+    if ((my $pos = index($haystack, $needle)) > -1) { $haystack = substr($haystack, $pos+$offset); } return $haystack; 
+}
+
+sub strrstr($$) {
+    my ($haystack, $needle) = @_;
+    if ((my $pos = index($haystack, $needle)) > -1) { $haystack = substr($haystack, 0, $pos); } return $haystack; 
 }
